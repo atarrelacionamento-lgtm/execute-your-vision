@@ -148,7 +148,7 @@ function UserModal({
               <div className="flex gap-2 mt-2">
                 <button
                   type="button"
-                  onClick={() => setPerms(Object.fromEntries(PERM_LABELS.map(({ key }) => [key, true])) as UserPermissions)}
+                  onClick={() => setPerms(Object.fromEntries(PERM_LABELS.map(({ key }) => [key, true])) as unknown as UserPermissions)}
                   className="text-xs text-primary hover:underline"
                 >
                   Marcar tudo
