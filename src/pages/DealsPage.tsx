@@ -1191,7 +1191,7 @@ export default function DealsPage() {
                                   )}
                                 </div>
                                 <div className="flex items-center gap-0.5 shrink-0">
-                                  {hasOverdueReminder && <Bell className="h-3 w-3 text-destructive" title="Lembrete atrasado" />}
+                                  {hasOverdueReminder && <span title="Lembrete atrasado"><Bell className="h-3 w-3 text-destructive" /></span>}
                                   <button onClick={() => toggleCard(card.id)} className="p-1 text-muted-foreground hover:text-foreground">
                                     {isExpanded ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />}
                                   </button>

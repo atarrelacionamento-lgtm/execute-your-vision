@@ -156,7 +156,7 @@ function UserModal({
                 <span className="text-muted-foreground text-xs">·</span>
                 <button
                   type="button"
-                  onClick={() => setPerms(Object.fromEntries(PERM_LABELS.map(({ key }) => [key, false])) as UserPermissions)}
+                  onClick={() => setPerms(Object.fromEntries(PERM_LABELS.map(({ key }) => [key, false])) as unknown as UserPermissions)}
                   className="text-xs text-muted-foreground hover:underline"
                 >
                   Desmarcar tudo
