@@ -1150,8 +1150,8 @@ export default function DealsPage() {
                     <div className="flex items-center gap-2 mb-2">
                       <div className={`w-2.5 h-2.5 rounded-full ${colorBar}`} />
                       <span className="text-sm font-medium text-foreground flex-1">{stage.title}</span>
-                      {hasRule && <Zap className="h-3 w-3 text-primary" title="Automação entre funis" />}
-                      {hasFup && <Bell className="h-3 w-3 text-amber-400" title="Follow-up ativo" />}
+{hasRule && <span title="Automação entre funis"><Zap className="h-3 w-3 text-primary" /></span>}
+                      {hasFup && <span title="Follow-up ativo"><Bell className="h-3 w-3 text-amber-400" /></span>}
                       <button
                         onClick={() => setStageFupModal(stage)}
                         className="p-0.5 text-muted-foreground hover:text-primary"
