@@ -1220,7 +1220,34 @@ export default function DealsPage() {
                                 )}
                               </div>
 
-                              {/* Telefones com WhatsApp (max 5, visíveis sem abrir card) */}
+                              {/* Contact name + role visible on card */}
+                              {card.contactName && (
+                                <div className="mb-2">
+                                  {(() => {
+                                    const phone = (card.phones ?? []).find(p => p.trim());
+                                    return (
+                                      <button
+                                        onClick={(e) => {
+                                          e.stopPropagation();
+                                          if (phone) {
+                                            setMiniChat({ name: card.contactName!, phone });
+                                          } else {
+                                            toast.info("Nenhum telefone cadastrado para este contato.");
+                                          }
+                                        }}
+                                        className="flex items-center gap-1.5 text-[11px] text-foreground hover:text-primary transition-colors group w-full text-left"
+                                      >
+                                        <User className="h-3 w-3 text-muted-foreground group-hover:text-primary shrink-0" />
+                                        <span className="truncate font-medium">{card.contactName}</span>
+                                        {card.contactRole && <span className="text-muted-foreground">· {card.contactRole}</span>}
+                                        {phone && <MessageCircle className="h-2.5 w-2.5 text-emerald-500 shrink-0 ml-auto" />}
+                                      </button>
+                                    );
+                                  })()}
+                                </div>
+                              )}
+
+                              {/* Telefones com WhatsApp */}
                               {visiblePhones.length > 0 && (
                                 <div className="flex flex-wrap gap-1 mb-2">
                                   {visiblePhones.map((ph, i) => (
