@@ -4,6 +4,7 @@ import { SidebarTrigger } from "@/components/ui/sidebar";
 import { TaskStore } from "@/lib/storage";
 import type { Task } from "@/types";
 import { useNavigate } from "react-router-dom";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 // ── Notificações de tarefas ────────────────────────
 function TaskNotifications() {
