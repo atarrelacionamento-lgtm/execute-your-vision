@@ -1186,11 +1186,6 @@ export default function DealsPage() {
                               <div className="flex items-start justify-between gap-1 mb-1.5">
                                 <div className="flex-1 min-w-0">
                                   <span className="font-medium text-sm text-foreground leading-tight block truncate">{card.companyName}</span>
-                                  {(card.contactName || card.contactRole) && (
-                                    <span className="text-[11px] text-muted-foreground">
-                                      {card.contactName}{card.contactRole ? ` · ${card.contactRole}` : ""}
-                                    </span>
-                                  )}
                                 </div>
                                 <div className="flex items-center gap-0.5 shrink-0">
                                   {hasOverdueReminder && <span title="Lembrete atrasado"><Bell className="h-3 w-3 text-destructive" /></span>}
