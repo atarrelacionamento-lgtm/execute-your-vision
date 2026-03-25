@@ -2,10 +2,11 @@ import { useState, useEffect } from "react";
 import {
   Plus, Flame, Sun, Snowflake, DollarSign,
   Pencil, Trash2, X, Settings, Zap, ToggleLeft, ToggleRight, ArrowRight,
-  Sparkles, Loader2, Phone, MessageCircle, StickyNote, Bell, ChevronDown, ChevronUp,
+  Sparkles, Loader2, Phone, MessageCircle, StickyNote, Bell, ChevronDown, ChevronUp, User,
 } from "lucide-react";
 import { FunnelDB, CompanyDB, FunnelTransitionDB } from "@/lib/db";
 import { StageFollowUpStore } from "@/lib/storage";
+import { MiniChatPopup } from "@/components/MiniChatPopup";
 import type {
   Funnel, FunnelCard, FunnelStage, Company, FunnelTransition,
   CardNote, CardReminder, StageFollowUp, FupMessage,
