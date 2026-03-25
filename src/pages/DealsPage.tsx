@@ -1377,6 +1377,13 @@ export default function DealsPage() {
           </div>
         </div>
       )}
+      {miniChat && (
+        <MiniChatPopup
+          contactName={miniChat.name}
+          contactPhone={miniChat.phone}
+          onClose={() => setMiniChat(null)}
+        />
+      )}
     </div>
   );
 }
