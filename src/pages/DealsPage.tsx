@@ -932,6 +932,7 @@ export default function DealsPage() {
   const [deleteCardId, setDeleteCardId]     = useState<string | null>(null);
   const [deleteFunnelId, setDeleteFunnelId] = useState<string | null>(null);
   const [expandedCards, setExpandedCards]   = useState<Set<string>>(new Set());
+  const [miniChat, setMiniChat] = useState<{ name: string; phone: string } | null>(null);
 
   async function reload() {
     const [all, c, tr] = await Promise.all([FunnelDB.getAll(), CompanyDB.getAll(), FunnelTransitionDB.getAll()]);
