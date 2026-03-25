@@ -2,8 +2,10 @@ import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
 
-// Althius brand: always dark by default
-document.documentElement.classList.add("dark");
+// Althius brand: dark by default, user can toggle
+if (!document.documentElement.classList.contains("light")) {
+  document.documentElement.classList.add("dark");
+}
 
 // Limpa dados de seed fake que possam ter sido gravados em sessões anteriores
 const fakeKeys = ["apollo_cities", "apollo_funnels"];

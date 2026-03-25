@@ -2,10 +2,11 @@ import { useState, useEffect } from "react";
 import {
   Plus, Flame, Sun, Snowflake, DollarSign,
   Pencil, Trash2, X, Settings, Zap, ToggleLeft, ToggleRight, ArrowRight,
-  Sparkles, Loader2, Phone, MessageCircle, StickyNote, Bell, ChevronDown, ChevronUp,
+  Sparkles, Loader2, Phone, MessageCircle, StickyNote, Bell, ChevronDown, ChevronUp, User,
 } from "lucide-react";
 import { FunnelDB, CompanyDB, FunnelTransitionDB } from "@/lib/db";
 import { StageFollowUpStore } from "@/lib/storage";
+import { MiniChatPopup } from "@/components/MiniChatPopup";
 import type {
   Funnel, FunnelCard, FunnelStage, Company, FunnelTransition,
   CardNote, CardReminder, StageFollowUp, FupMessage,
@@ -931,6 +932,7 @@ export default function DealsPage() {
   const [deleteCardId, setDeleteCardId]     = useState<string | null>(null);
   const [deleteFunnelId, setDeleteFunnelId] = useState<string | null>(null);
   const [expandedCards, setExpandedCards]   = useState<Set<string>>(new Set());
+  const [miniChat, setMiniChat] = useState<{ name: string; phone: string } | null>(null);
 
   async function reload() {
     const [all, c, tr] = await Promise.all([FunnelDB.getAll(), CompanyDB.getAll(), FunnelTransitionDB.getAll()]);
@@ -1184,11 +1186,6 @@ export default function DealsPage() {
                               <div className="flex items-start justify-between gap-1 mb-1.5">
                                 <div className="flex-1 min-w-0">
                                   <span className="font-medium text-sm text-foreground leading-tight block truncate">{card.companyName}</span>
-                                  {(card.contactName || card.contactRole) && (
-                                    <span className="text-[11px] text-muted-foreground">
-                                      {card.contactName}{card.contactRole ? ` · ${card.contactRole}` : ""}
-                                    </span>
-                                  )}
                                 </div>
                                 <div className="flex items-center gap-0.5 shrink-0">
                                   {hasOverdueReminder && <span title="Lembrete atrasado"><Bell className="h-3 w-3 text-destructive" /></span>}
@@ -1223,7 +1220,34 @@ export default function DealsPage() {
                                 )}
                               </div>
 
-                              {/* Telefones com WhatsApp (max 5, visíveis sem abrir card) */}
+                              {/* Contact name + role visible on card */}
+                              {card.contactName && (
+                                <div className="mb-2">
+                                  {(() => {
+                                    const phone = (card.phones ?? []).find(p => p.trim());
+                                    return (
+                                      <button
+                                        onClick={(e) => {
+                                          e.stopPropagation();
+                                          if (phone) {
+                                            setMiniChat({ name: card.contactName!, phone });
+                                          } else {
+                                            toast.info("Nenhum telefone cadastrado para este contato.");
+                                          }
+                                        }}
+                                        className="flex items-center gap-1.5 text-[11px] text-foreground hover:text-primary transition-colors group w-full text-left"
+                                      >
+                                        <User className="h-3 w-3 text-muted-foreground group-hover:text-primary shrink-0" />
+                                        <span className="truncate font-medium">{card.contactName}</span>
+                                        {card.contactRole && <span className="text-muted-foreground">· {card.contactRole}</span>}
+                                        {phone && <MessageCircle className="h-2.5 w-2.5 text-emerald-500 shrink-0 ml-auto" />}
+                                      </button>
+                                    );
+                                  })()}
+                                </div>
+                              )}
+
+                              {/* Telefones com WhatsApp */}
                               {visiblePhones.length > 0 && (
                                 <div className="flex flex-wrap gap-1 mb-2">
                                   {visiblePhones.map((ph, i) => (
@@ -1352,6 +1376,13 @@ export default function DealsPage() {
             </div>
           </div>
         </div>
+      )}
+      {miniChat && (
+        <MiniChatPopup
+          contactName={miniChat.name}
+          contactPhone={miniChat.phone}
+          onClose={() => setMiniChat(null)}
+        />
       )}
     </div>
   );
