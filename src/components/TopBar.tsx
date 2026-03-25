@@ -181,6 +181,7 @@ export function TopBar() {
         </div>
       </div>
 
+      <ThemeToggle />
       <TaskNotifications />
 
       {/* AI button */}
